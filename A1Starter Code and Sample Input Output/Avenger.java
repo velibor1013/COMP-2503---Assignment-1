@@ -8,5 +8,20 @@ public class Avenger implements Comparable <Avenger>{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	{
+		private String heroName;
+		private String heroAlias;
+		private int frequency;
+		public String getHeroName() {return heroName;}
+		public String getHeroAlias() {return heroAlias;}
+		public int getFrequency() {return frequency;}
+		
+		public Avenger (String heroName, String heroAlias, int frequency) {
+			this.heroName = heroName;
+			this.heroAlias = heroAlias;
+			this.frequency = frequency;
+		}
+	}
 
 }
