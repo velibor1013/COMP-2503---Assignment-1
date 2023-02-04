@@ -56,11 +56,11 @@ public class A1 {
 		File file = new File("./A1Starter Code and Sample Input Output\\input2.txt");
         Scanner sc = new Scanner(file);
         String cleanedString = "";
-        int counter = 0;
-
-        ArrayList<Integer> counterList = new ArrayList<>();
+        ArrayList<Avenger> listOfAvengers = new ArrayList<>();
+        
+        //Add all the Avengers to the ArrayList listOfAvengers 
         for (int i = 0; i < avengerRoster.length; i++) {
-            counterList.add(0);
+            listOfAvengers.add(new Avenger(avengerRoster[i][0], avengerRoster[i][1], 0));
         }
         
         while (sc.hasNext()) {
@@ -77,17 +77,19 @@ public class A1 {
             System.out.print(cleanedString + " ");
             for (int i = 0; i < avengerRoster.length; i++) {
                 for (int j = 0; j < avengerRoster[i].length; j++) {
-                	counter++;
                     if (word.equals(avengerRoster[i][j])) {
-                        counterList.set(i, counterList.get(i) + 1);
+                        //counterList.set(i, counterList.get(i) + 1);
+                        listOfAvengers.get(i).setFrequency(listOfAvengers.get(i).getFrequency() + 1); //increase the frequency by 1
                     }
                 }
             }
             totalwordcount++;
         }
+        
+        //temporary print to make sure everything works DELETE THIS******
         System.out.println(cleanedString);
-        System.out.println(counterList);
-            
+        System.out.println(listOfAvengers);
+
         
 	}
 	
