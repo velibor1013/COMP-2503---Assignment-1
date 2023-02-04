@@ -32,14 +32,13 @@ public class Avenger implements Comparable <Avenger>{
 		return heroAlias + " aka " + heroName + " mentioned " + frequency + " time(s)";
 	}
 	
-	public boolean equals(String heroAlias, String heroName) { // not working 
-		if (this.heroName.toLowerCase().equals(heroName) & this.heroAlias.toLowerCase().equals(heroAlias)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-		
-	}
+	public boolean equals(Object avenger) {
+        if (this == avenger) 
+        	return true;
+        if (avenger == null || getClass() != avenger.getClass()) 
+        	return false;
+        Avenger other = (Avenger) avenger;
+        return heroName.equals(other.heroName) && heroAlias.equals(other.heroAlias);
+    }
 
 }

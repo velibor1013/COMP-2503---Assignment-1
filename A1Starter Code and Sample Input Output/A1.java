@@ -59,10 +59,10 @@ public class A1 {
         String cleanedString = "";
         
         //Add all the Avengers to the ArrayList listOfAvengers 
-        for (int i = 0; i < avengerRoster.length; i++) {
-            listOfAvengers.add(new Avenger(avengerRoster[i][0], avengerRoster[i][1], 0));
-        }
-        int k = 0;
+		/*
+		 * for (int i = 0; i < avengerRoster.length; i++) { listOfAvengers.add(new
+		 * Avenger(avengerRoster[i][0], avengerRoster[i][1], 0)); }
+		 */
         while (sc.hasNext()) {
             String word = sc.next();
             
@@ -76,13 +76,42 @@ public class A1 {
             word = word.replaceAll("[^a-zA-Z ]", "").toLowerCase();
             cleanedString = word;
             System.out.print(cleanedString + " ");
+            /*
             for (int i = 0; i < avengerRoster.length; i++) {
                 for (int j = 0; j < avengerRoster[i].length; j++) {
                     if (word.equals(avengerRoster[i][j])) {
-                    	listOfAvengers.get(i).setFrequency(listOfAvengers.get(i).getFrequency() + 1); //increase the frequency by 1
+                    	for (int k = 0; k < listOfAvengers.size(); k++) {
+                    		if (!listOfAvengers.contains(new Avenger(avengerRoster[i][0], avengerRoster[i][1], 0))) {
+                    			listOfAvengers.add(new Avenger(avengerRoster[i][0], avengerRoster[i][1], 0));
+                    		}
+                    		else {
+                    			
+                    			listOfAvengers.get(k).setFrequency(listOfAvengers.get(k).getFrequency() + 1); //increase the frequency by 1
+                    		}
+                    	}
                     }
                 }
             }
+            */
+            for (int i = 0; i < avengerRoster.length; i++) {
+                for (int j = 0; j < avengerRoster[i].length; j++) {
+                    if (word.equals(avengerRoster[i][j])) {
+                        Avenger currentAvenger = new Avenger(avengerRoster[i][0], avengerRoster[i][1], 1);
+                        int index1 = listOfAvengers.indexOf(currentAvenger);
+                        if (index1 == -1) {
+                            listOfAvengers.add(currentAvenger);
+                        } else {
+                            listOfAvengers.get(index1).setFrequency(listOfAvengers.get(index1).getFrequency() + 1);
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+
             totalwordcount++;
         }
         
