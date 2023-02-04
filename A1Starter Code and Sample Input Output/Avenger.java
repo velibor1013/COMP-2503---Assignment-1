@@ -31,5 +31,15 @@ public class Avenger implements Comparable <Avenger>{
 	public String toString() {
 		return heroAlias + " aka " + heroName + " mentioned " + frequency + " time(s)";
 	}
+	
+	public boolean equals(String heroAlias, String heroName) { // not working 
+		if (this.heroName.toLowerCase().equals(heroName) & this.heroAlias.toLowerCase().equals(heroAlias)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
 
 }
