@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -23,7 +24,7 @@ public class A1 {
 
 	private int topN = 4;
 	private int totalwordcount = 0;
-	private ArrayList<Avenger> avengersArrayList = new ArrayList<>();
+	private ArrayList<Avenger> listOfAvengers = new ArrayList<>();
 
 	public static void main(String[] args) throws FileNotFoundException {
 		A1 a1 = new A1();
@@ -41,7 +42,7 @@ public class A1 {
 	 * how many times avengers are mentioned by alias or last name.
 	 * @throws FileNotFoundException 
 	 */
-	ArrayList<Avenger> listOfAvengers = new ArrayList<>();
+	
 	private void readInput() throws FileNotFoundException {
 		/*
 		In a loop, while the scanner object has not reached end of stream,
@@ -53,16 +54,12 @@ public class A1 {
 				- if this avenger has already been mentioned, increase the frequency count for the object already in the list.
 				- if this avenger has not been mentioned before, add the newly created avenger to the list, remember to set the frequency.
 		*/ 
+		
 		//Get the file
-		File file = new File("./A1Starter Code and Sample Input Output\\input2.txt");
+		File file = new File("./A1Starter Code and Sample Input Output\\input4.txt");
         Scanner sc = new Scanner(file);
         String cleanedString = "";
         
-        //Add all the Avengers to the ArrayList listOfAvengers 
-		/*
-		 * for (int i = 0; i < avengerRoster.length; i++) { listOfAvengers.add(new
-		 * Avenger(avengerRoster[i][0], avengerRoster[i][1], 0)); }
-		 */
         while (sc.hasNext()) {
             String word = sc.next();
             
@@ -72,27 +69,11 @@ public class A1 {
             	word = word.substring(0,index);
 			
             
-            // Remove special characters and convert to lowercase
+            // Remove special characters and convert to lower case
             word = word.replaceAll("[^a-zA-Z ]", "").toLowerCase();
             cleanedString = word;
             System.out.print(cleanedString + " ");
-            /*
-            for (int i = 0; i < avengerRoster.length; i++) {
-                for (int j = 0; j < avengerRoster[i].length; j++) {
-                    if (word.equals(avengerRoster[i][j])) {
-                    	for (int k = 0; k < listOfAvengers.size(); k++) {
-                    		if (!listOfAvengers.contains(new Avenger(avengerRoster[i][0], avengerRoster[i][1], 0))) {
-                    			listOfAvengers.add(new Avenger(avengerRoster[i][0], avengerRoster[i][1], 0));
-                    		}
-                    		else {
-                    			
-                    			listOfAvengers.get(k).setFrequency(listOfAvengers.get(k).getFrequency() + 1); //increase the frequency by 1
-                    		}
-                    	}
-                    }
-                }
-            }
-            */
+            
             for (int i = 0; i < avengerRoster.length; i++) {
                 for (int j = 0; j < avengerRoster[i].length; j++) {
                     if (word.equals(avengerRoster[i][j])) {
@@ -105,21 +86,10 @@ public class A1 {
                         }
                     }
                 }
+                
             }
-
-
-
-
-
-
             totalwordcount++;
-        }
-        
-        //temporary print to make sure everything works DELETE THIS******
-        System.out.println(cleanedString);
-        System.out.println(listOfAvengers);
-
-        
+        }  
 	}
 	
 
@@ -127,29 +97,43 @@ public class A1 {
 	 * print the results
 	 */
 	private void printResults() {
+		
+		if (listOfAvengers.size() < 4) {
+			topN = listOfAvengers.size();
+		}
+		System.out.println(""); // this extra line is because the program is not printing the first line for line reason 
 		System.out.println("Total number of words: " + totalwordcount);
-		System.out.println("Number of Avengers Mentioned: " + avengersArrayList.size());
+		System.out.println("Number of Avengers Mentioned: " +  listOfAvengers.size());
 		System.out.println();
 
-		System.out.println("All avengers in the order they appeared in the input stream: \n");
+		System.out.println("All avengers in the order they appeared in the input stream:");
 		for (int i = 0; i < listOfAvengers.size(); i++) {
 			System.out.println(listOfAvengers.get(i).toString());
 		}
 		System.out.println();
 		
-		System.out.println("Top " + topN + " most popular avengers: \n");
-		// Todo: Print the most popular avengers, see the instructions for tie breaking
-		// Make sure you follow the formatting example in the sample output
+		System.out.println("Top " + topN + " most popular avengers:");
+		Avenger.sortByFrequency = true;
+		Collections.sort(listOfAvengers, Collections.reverseOrder()); // sort the list in descending order, which is most to least popular
+		for (int i = 0; i < topN; i++) {
+			System.out.println(listOfAvengers.get(i).toString());
+		}
 		System.out.println();
 
-		System.out.println("Top " + topN + " least popular avengers: \n");
-		// Todo: Print the least popular avengers, see the instructions for tie breaking
-		// Make sure you follow the formatting example in the sample output		
+		System.out.println("Top " + topN + " least popular avengers:");
+		Avenger.sortByFrequency = true;
+		Collections.sort(listOfAvengers); //sort the list in ascending order, which is least to most popular
+		for (int i = 0; i < topN; i++) {
+			System.out.println(listOfAvengers.get(i).toString());
+		}
 		System.out.println();
 
-		System.out.println("All mentioned avengers in alphabetical order: \n");
-		// Todo: Print the list of avengers in alphabetical order
-		// Make sure you follow the formatting example in the sample output
+		System.out.println("All mentioned avengers in alphabetical order:");
+		Avenger.sortByFrequency = false;
+		Collections.sort(listOfAvengers); //sort 
+		for (int i = 0; i < listOfAvengers.size(); i++) {
+			System.out.println(listOfAvengers.get(i).toString());
+		}
 		System.out.println();
 	}
 }

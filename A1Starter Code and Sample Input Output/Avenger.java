@@ -2,17 +2,21 @@
 public class Avenger implements Comparable <Avenger>{
 
 	// TODO: Implement the Avenger Class
+	private String heroName;
+	private String heroAlias;
+	private int frequency;
+	public static boolean sortByFrequency = false;
+	
+	public Avenger() {}
 	
 	@Override
 	public int compareTo(Avenger o) {
 		// TODO Auto-generated method stub
-		return 0;
+		if (sortByFrequency) {
+            return Integer.compare(this.frequency, o.frequency);
+        }
+		return this.heroAlias.compareTo(o.heroAlias);
 	}
-	public Avenger() {}
-	
-	private String heroName;
-	private String heroAlias;
-	private int frequency;
 	
 	public void setFrequency(int frequency) {
 		this.frequency = frequency;
@@ -22,7 +26,7 @@ public class Avenger implements Comparable <Avenger>{
 	public String getHeroAlias() {return heroAlias;}
 	public int getFrequency() {return frequency;}
 	
-	public Avenger (String heroName, String heroAlias, int frequency) {
+	public Avenger (String heroAlias, String heroName, int frequency) {
 		this.heroName = heroName;
 		this.heroAlias = heroAlias;
 		this.frequency = frequency;
