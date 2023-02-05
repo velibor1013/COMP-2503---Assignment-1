@@ -25,6 +25,7 @@ public class A1 {
 	private int topN = 4;
 	private int totalwordcount = 0;
 	private ArrayList<Avenger> listOfAvengers = new ArrayList<>();
+	
 
 	public static void main(String[] args) throws FileNotFoundException {
 		A1 a1 = new A1();
@@ -62,46 +63,49 @@ public class A1 {
         
         while (sc.hasNext()) {
             String word = sc.next();
-            
-            //remove apostrophe
-            int index = word.indexOf("'"); 
-            if (index > 0) 
-            	word = word.substring(0,index);
-			
-            
-            // Remove special characters and convert to lower case
-            word = word.replaceAll("[^a-zA-Z ]", "").toLowerCase();
-            cleanedString = word;
-            System.out.print(cleanedString + " ");
-            
-            for (int i = 0; i < avengerRoster.length; i++) {
-                for (int j = 0; j < avengerRoster[i].length; j++) {
-                    if (word.equals(avengerRoster[i][j])) {
-                        Avenger currentAvenger = new Avenger(avengerRoster[i][0], avengerRoster[i][1], 1);
-                        int index1 = listOfAvengers.indexOf(currentAvenger);
-                        if (index1 == -1) {
-                            listOfAvengers.add(currentAvenger);
-                        } else {
-                            listOfAvengers.get(index1).setFrequency(listOfAvengers.get(index1).getFrequency() + 1);
-                        }
-                    }
-                }
-                
+            if (word != null) { // check to make sure word is not null, in case of error
+                word = word.trim(); // trim off blank spaces
+	            if (!word.equals("")) { // check for blank word 
+	            
+		            //remove apostrophe
+		            int index = word.indexOf("'"); 
+		            if (index > 0) 
+		            	word = word.substring(0,index);
+		
+		            // Remove special characters and convert to lower case
+		            word = word.replaceAll("[^a-zA-Z ]", "").toLowerCase();
+		            cleanedString = word;
+		            
+		            for (int i = 0; i < avengerRoster.length; i++) {
+		                for (int j = 0; j < avengerRoster[i].length; j++) {
+		                    if (word.equals(avengerRoster[i][j])) {
+		                        Avenger currentAvenger = new Avenger(avengerRoster[i][0], avengerRoster[i][1], 1);
+		                        int index1 = listOfAvengers.indexOf(currentAvenger);
+		                        if (index1 == -1) {
+		                            listOfAvengers.add(currentAvenger);
+		                        } else {
+		                            listOfAvengers.get(index1).setFrequency(listOfAvengers.get(index1).getFrequency() + 1);
+		                        }
+		                    }
+		                }
+		                
+		            }
+	            	totalwordcount++;
+	            }
             }
-            totalwordcount++;
-        }  
+        }
 	}
 	
-
 	/**
 	 * print the results
 	 */
+	
 	private void printResults() {
 		
 		if (listOfAvengers.size() < 4) {
 			topN = listOfAvengers.size();
 		}
-		System.out.println(""); // this extra line is because the program is not printing the first line for line reason 
+		
 		System.out.println("Total number of words: " + totalwordcount);
 		System.out.println("Number of Avengers Mentioned: " +  listOfAvengers.size());
 		System.out.println();
@@ -130,7 +134,7 @@ public class A1 {
 
 		System.out.println("All mentioned avengers in alphabetical order:");
 		Avenger.sortByFrequency = false;
-		Collections.sort(listOfAvengers); //sort 
+		Collections.sort(listOfAvengers); //sort by alphabetical order of the alias 
 		for (int i = 0; i < listOfAvengers.size(); i++) {
 			System.out.println(listOfAvengers.get(i).toString());
 		}
