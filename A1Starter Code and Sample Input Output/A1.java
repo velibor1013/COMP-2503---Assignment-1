@@ -35,6 +35,11 @@ public class A1 {
 	public void run() throws FileNotFoundException {
 		readInput();
 		printResults();
+	}
+	
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+	}
 		
 	}
 
