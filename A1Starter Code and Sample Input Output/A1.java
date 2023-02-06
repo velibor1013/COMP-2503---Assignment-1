@@ -37,11 +37,11 @@ public class A1 {
 		printResults();
 	}
 	
-	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
-	}
+	//public static void main(String[] args) {
+	//	Scanner input = new Scanner(System.in);
+	//}
 		
-	}
+	//}
 
 	/**
 	 * read the input stream and keep track  
@@ -52,8 +52,8 @@ public class A1 {
 	private void readInput() throws FileNotFoundException {
 		/*
 		In a loop, while the scanner object has not reached end of stream,
-		 	- read a word. ****Done****
-		 	- clean up the word  ****Done****
+		 	- read a word.
+		 	- clean up the word
 		    - if the word is not empty, add the word count. 
 		    - Check if the word is either an avenger alias or last name then
 				- Create a new avenger object with the corresponding alias and last name.
@@ -62,9 +62,8 @@ public class A1 {
 		*/ 
 		
 		//Get the file
-		File file = new File("./A1Starter Code and Sample Input Output\\input4.txt");
+		File file = new File(A1.class.getClassLoader().getResource("input1.txt").getFile());
         Scanner sc = new Scanner(file);
-        String cleanedString = "";
         
         while (sc.hasNext()) {
             String word = sc.next();
@@ -79,7 +78,6 @@ public class A1 {
 		
 		            // Remove special characters and convert to lower case
 		            word = word.replaceAll("[^a-zA-Z ]", "").toLowerCase();
-		            cleanedString = word;
 		            
 		            for (int i = 0; i < avengerRoster.length; i++) {
 		                for (int j = 0; j < avengerRoster[i].length; j++) {
@@ -93,12 +91,12 @@ public class A1 {
 		                        }
 		                    }
 		                }
-		                
 		            }
 	            	totalwordcount++;
 	            }
             }
         }
+        sc.close();
 	}
 	
 	/**
